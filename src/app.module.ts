@@ -1,13 +1,23 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { Module, ValidationPipe } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { DatabaseModule } from './database/database.module';
+import { configuration } from 'config';
 import { CustomersModule } from './customers/customers.module';
-import { WalletsModule } from './wallets/wallets.module';
-import { TransactionsModule } from './transactions/transactions.module';
+import { AuthModule } from './auth/auth.module';
+import { APP_PIPE } from '@nestjs/core';
+
 
 @Module({
-  imports: [CustomersModule, WalletsModule, TransactionsModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [configuration]
+    }),
+    DatabaseModule,
+    CustomersModule,
+    AuthModule
+  ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
