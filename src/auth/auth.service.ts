@@ -27,6 +27,8 @@ export class AuthService {
             throw new NotFoundException('User not found')
         }
 
+        console.log(customer)
+
         const validatePassword = await customer.validatePassword(passkey);
 
         if (!validatePassword) {

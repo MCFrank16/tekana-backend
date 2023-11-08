@@ -1,6 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Index } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Index, OneToOne, JoinColumn } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-
+import { Wallet } from './../wallets/wallet.entity';
 @Entity()
 export class Customer {
 
@@ -29,6 +29,10 @@ export class Customer {
 
     @UpdateDateColumn({ type: "timestamp" })
     updatedAt: Date
+
+    @OneToOne(() => Wallet, { onDelete: 'CASCADE' })
+    @JoinColumn()
+    wallet: Wallet
 
     async validatePassword(password: string): Promise<boolean> {
         return bcrypt.compare(password, this.password);

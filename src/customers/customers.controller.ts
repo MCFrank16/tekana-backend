@@ -18,7 +18,7 @@ export class CustomersController {
   }
 
   @Get('read/:id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.customersService.findOne(id);
   }
 

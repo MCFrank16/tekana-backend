@@ -5,6 +5,7 @@ import { configuration } from 'config';
 import { CustomersModule } from './customers/customers.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_PIPE } from '@nestjs/core';
+import { WalletsModule } from './wallets/wallets.module';
 
 
 @Module({
@@ -15,7 +16,8 @@ import { APP_PIPE } from '@nestjs/core';
     }),
     DatabaseModule,
     CustomersModule,
-    AuthModule
+    AuthModule,
+    WalletsModule
   ],
   controllers: [],
   providers: [],

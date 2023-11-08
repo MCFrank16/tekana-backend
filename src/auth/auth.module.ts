@@ -12,12 +12,13 @@ import { JwtStrategy } from './strategy/jwt.strategy';
 import { LocalStrategy } from './strategy/local.strategy';
 import { JwtRefreshTokenStrategy } from './strategy/jwt-refresh-token.strategy';
 import { RefreshTokenStorage } from './refresh-token-storage';
+import { Wallet } from '../wallets/wallet.entity';
 
 @Module({
   imports: [
     CustomersModule,
     ConfigModule.forRoot(),
-    TypeOrmModule.forFeature([Customer]),
+    TypeOrmModule.forFeature([Customer, Wallet]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: process.env.JWT_SECRET,
