@@ -1,7 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { CustomersService } from './customers.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { Public } from '../auth/decorators/public.decorator';
 
 @Controller('customers')
 export class CustomersController {
@@ -12,16 +14,19 @@ export class CustomersController {
     return this.customersService.create(createCustomerDto);
   }
 
+  @Public()
   @Get("all")
   findAll() {
     return this.customersService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('read/:id')
   async findOne(@Param('id') id: string) {
     return this.customersService.findOne(id);
   }
-
+  
+  @UseGuards(JwtAuthGuard)
   @Patch('update/:id')
   update(@Param('id') id: string, @Body() updateCustomerDto: UpdateCustomerDto) {
     return this.customersService.update(id, updateCustomerDto);

@@ -1,4 +1,4 @@
-import { Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, Entity, JoinColumn } from 'typeorm';
+import { Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, Entity } from 'typeorm';
 import { Customer } from '../customers/customer.entity';
 
 @Entity()
@@ -11,6 +11,9 @@ export class Wallet {
 
     @CreateDateColumn({ type: "timestamp" })
     createdAt: Date
+
+    @Column({ type: 'varchar', default: 'active' })
+    status: string;
 
     @UpdateDateColumn({ type: "timestamp" })
     updatedAt: Date

@@ -16,6 +16,7 @@ export class AuthController {
         private readonly customersService: CustomersService
     ){}
 
+    @Public()
     @Post('register')
     async signUp(@Body() createCustomerDto:CreateCustomerDto) {
         return this.customersService.create(createCustomerDto);

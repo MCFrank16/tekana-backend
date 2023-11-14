@@ -30,7 +30,6 @@ export class WalletsService {
       }
       return wallet;
     } catch (error) {
-      console.log(error)
       throw error;
     }
     
@@ -67,5 +66,9 @@ export class WalletsService {
         id: wallet_id
       }
     })
+  }
+
+  updateWalletAmount(wallet_id: string, amount: number) {
+    return this.walletRepository.update(wallet_id, { amount });
   }
 }
