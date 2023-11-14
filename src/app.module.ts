@@ -6,6 +6,8 @@ import { CustomersModule } from './customers/customers.module';
 import { AuthModule } from './auth/auth.module';
 import { WalletsModule } from './wallets/wallets.module';
 import { TransactionsModule } from './transactions/transactions.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { ResponseInterceptors } from './interceptors/response.interceptor';
 
 @Module({
   imports: [
@@ -20,6 +22,11 @@ import { TransactionsModule } from './transactions/transactions.module';
     TransactionsModule
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ResponseInterceptors
+    }
+  ],
 })
 export class AppModule {}
